@@ -109,7 +109,7 @@ def submit_new(info):
     # If more avaliable than the single job
     # limit, treat the job limit as the number of avaliable.
     avaliable = min(avaliable, SINGLE_JOB_LIMIT)
-    print('Real avaliable: ', avaliable)
+    print('Real avaliable:', avaliable)
     
     # Case 1: The number of remaining jobs
     # can all be submitted at once
