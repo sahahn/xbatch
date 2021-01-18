@@ -73,7 +73,7 @@ def save_x_script(info, x_loc, start, end):
     lines[info['array_ind']] += str(start) + '-' + str(end) + '\n'
     
     # Add in line that increments
-    inc_line = 'export SLURM_ARRAY_TASK_ID="$(($SLURM_ARRAY_TASK_ID + ' + str(increment) + '))"\n'
+    inc_line = ['export SLURM_ARRAY_TASK_ID="$(($SLURM_ARRAY_TASK_ID + ' + str(increment) + '))"\n']
     he = info['header_end']    
     lines[:he+1] + inc_line + lines[he+1:]
 
