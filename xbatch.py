@@ -25,7 +25,7 @@ def main():
     
     # Start manager
     manager_pid = start_manager(script_loc)
-    print('Started Job Manager with pid:', manager_pid)
+    print('Started xbatch job manager with pid:', manager_pid)
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,7 @@
 import time
 import sys
 import subprocess
-import sys
+import os
 from config import (INTERVAL, USER, MIN_SUBMIT, MAX_JOB_LIMIT,
                     SINGLE_JOB_LIMIT, RESUBMIT_ON_FAIL)
 
@@ -67,9 +67,6 @@ def save_x_script(info, x_loc, start, end):
 
 
 def submit(info, start, end):
-    
-    # For de-bugging
-    print('Submit start=', start, ' end=', end, split='')
 
     # Get loc
     x_loc = get_x_loc(info['script_loc'])
@@ -79,7 +76,9 @@ def submit(info, start, end):
 
     # Call sbatch on saved script
     output = sbatch(x_loc)
-    print('output:', output)
+
+    # Delete temp submit x script
+    os.remove(x_loc)
     
     # Return if worked or not
     if 'Submitted batch job' in output:
@@ -92,29 +91,23 @@ def submit_new(info):
     # Get number of already queued or running
     # jobs.
     n_current_jobs = get_current_n_jobs()
-    print('current jobs:', n_current_jobs)
 
     # Compute number of avaliable jobs
     avaliable = MAX_JOB_LIMIT - n_current_jobs
-    print('avaliable jobs:', n_current_jobs)
 
     # Compute remaining number of jobs to run
     remaining = info['end'] + 1 - info['start']
-    print('remaining jobs:', remaining)
     
     # Start at the last place left off
     start = info['start']
-    print('current start:', start)
 
     # If more avaliable than the single job
     # limit, treat the job limit as the number of avaliable.
     avaliable = min(avaliable, SINGLE_JOB_LIMIT)
-    print('Real avaliable:', avaliable)
     
     # Case 1: The number of remaining jobs
     # can all be submitted at once
     if remaining <= avaliable:
-        print('Case 1')
         
         # Set end to saved last end
         end = info['end']
@@ -123,7 +116,6 @@ def submit_new(info):
     # make sure avaliable is greater
     # than the min submit threshold
     elif avaliable >= MIN_SUBMIT:
-        print('Case 2')
 
         # -1 as the range is inclusive
         end = start + avaliable - 1
@@ -131,7 +123,6 @@ def submit_new(info):
     # Case 3: Min submit is less than
     # the number of avaliable, don't submit anything
     else:
-        print('Case 3')
         return
 
     # Try to submit the job.
@@ -161,7 +152,6 @@ def submit_new(info):
 
     # Update saved start
     info['start'] = end + 1
-    print('new start:', info['start'])
 
     return
     
