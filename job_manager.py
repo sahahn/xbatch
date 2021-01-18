@@ -49,7 +49,12 @@ def get_x_loc(script_loc):
     # Get x script loc from base script location
     base = script_loc.split('.')[0]
     end = '.' + script_loc.split('.')[1]
-    x_loc = base + '_temp' + end
+    
+    # In case of existing file...
+    cnt = 0
+    x_loc = base + '_temp' + str(cnt) + end
+    while os.path.exists(x_loc):
+        x_loc = base + '_temp' + str(cnt) + end
 
     return x_loc
 
