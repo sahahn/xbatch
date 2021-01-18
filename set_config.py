@@ -29,11 +29,11 @@ def main():
 
         elif line.startswith('INTERVAL = '):
             print(INTERVAL_DESC)
-            INTERVAL = input('INTERVAL (int, default=3600): ')
+            INTERVAL = input('INTERVAL (int, default=21600): ')
             print()
             
             if INTERVAL == '':
-                INTERVAL = '3600'
+                INTERVAL = '21600'
             else:
                 INTERVAL = str(int(INTERVAL))
 

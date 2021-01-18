@@ -5,7 +5,8 @@ USER_DESC = 'The name of the SLURM user using xbatch, e.g., your login name'
 
 INTERVAL = 3600
 INTERVAL_DESC = 'How often xbatch should check to add new jobs in seconds. ' \
-                'e.g., 1 hour == 3600, and new jobs will attempt to be added every hour.'
+                'e.g., 1 hour == 3600, and new jobs will attempt to be added every hour .' \
+                '21600 == 6 hours.'
 
 MAX_JOB_LIMIT = 1000
 MAX_JOB_LIMIT_DESC = 'The number of jobs a user can submit / have running as ' \
