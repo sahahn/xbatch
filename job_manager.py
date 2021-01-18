@@ -95,7 +95,7 @@ def submit(info, start, end):
     output = sbatch(x_loc)
 
     # Delete temp submit x script
-    os.remove(x_loc)
+    #os.remove(x_loc)
     
     # Return if worked or not
     if 'Submitted batch job' in output:
