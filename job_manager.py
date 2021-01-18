@@ -195,8 +195,29 @@ def main():
     # Create info dict from passed script
     info = init_script_parse(script_loc)
 
+    # Submit initial jobs
+    # Note: this is outside of
+    # the loop s.t., the task manager doesn't
+    # have to wait a full interval after submitting
+    # the last jobs to close the program
+    submit_new(info)
 
-    time.sleep(INTERVAL)
+    # Enter job submission loop,
+    # which will continue while
+    # start is less than or equal to end,
+    # note they can be equal as the range is inclusive,
+    # so when equal just means 1 job remaining.
+    while info['start'] <= info['end']:
+
+        # Wait one interval
+        time.sleep(INTERVAL)
+
+        # Try to submit more jobs based on
+        # avaliable jobs and remaining jobs
+        submit_new(info)
+
+    # Done
+    return
 
 
 if __name__ == "__main__":
