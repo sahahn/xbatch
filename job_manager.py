@@ -58,7 +58,7 @@ def save_x_script(info, x_loc, start, end):
 
     # Add start and end to lines
     lines = info['lines'].copy()
-    lines[info['array_ind']] += str(start) + '-' + str(end)
+    lines[info['array_ind']] += str(start) + '-' + str(end) + '\n'
 
     # Save file - okay to overwrite existing
     with open(x_loc, 'w') as f:
