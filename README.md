@@ -20,7 +20,7 @@ Assuming that the limit of jobs per one script is also limited to 1000, this wou
 
     sbatch script.sh
 
-By just replacing sbatch with xbatch though, and it should now submit!
+By just replacing sbatch with xbatch, now it should submit!
 
     xbatch script.sh
 
