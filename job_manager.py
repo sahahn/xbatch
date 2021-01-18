@@ -70,12 +70,16 @@ def save_x_script(info, x_loc, start, end):
 
     # Add start and end to lines
     lines = info['lines'].copy()
+<<<<<<< HEAD
     lines[info['array_ind']] += str(start) + '-' + str(end)
     
     # Add in line that increments
     inc_line = 'export SLURM_ARRAY_TASK_ID="$(($SLURM_ARRAY_TASK_ID + ' + str(increment) + '))"\n'
     he = info['header_end']    
     lines[:he+1] + inc_line + lines[he+1:]
+=======
+    lines[info['array_ind']] += str(start) + '-' + str(end) + '\n'
+>>>>>>> aa2ad1dd43dadc6727f99401f201eadfc59071c5
 
     # Save file - okay to overwrite existing
     with open(x_loc, 'w') as f:
