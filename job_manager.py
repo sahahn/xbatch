@@ -54,6 +54,7 @@ def get_x_loc(script_loc):
     cnt = 0
     x_loc = base + '_temp' + str(cnt) + end
     while os.path.exists(x_loc):
+        cnt += 1
         x_loc = base + '_temp' + str(cnt) + end
 
     return x_loc
