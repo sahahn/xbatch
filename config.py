@@ -3,13 +3,13 @@ USER = 'sahahn'
 
 # How often xbatch should check to
 # add new jobs, note: 3600 == 1 Hour
-INTERVAL = 3600
+INTERVAL = 60
 
 # Minimum number of jobs to submit at once
 # with the exception of the last submission,
 # e.g., if only 20 left and MIN_SUBMIT = 100,
 # will still submit 
-MIN_SUBMIT = 100
+MIN_SUBMIT = 10
 
 # Number of jobs a user can submit as
 # enforced by the cluster.
@@ -20,7 +20,7 @@ MAX_JOB_LIMIT = 1000
 # enforced by the cluster.
 # This is also the maximum number of jobs
 # that will be queue'ed in one INTERVAL.
-SINGLE_JOB_LIMIT = 1000
+SINGLE_JOB_LIMIT = 20
 
 # In the case that a job does not submit
 # this optional parameter if set to True

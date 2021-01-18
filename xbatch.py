@@ -4,9 +4,11 @@ import os
 import inspect
 
 def start_manager(script_loc):
-
+    
+    # Get job manager script loc
     job_manager_loc = os.path.abspath(inspect.getfile(main))
-    job_manager_loc.replace('xbatch.py', 'job_manager.py')
+    job_manager_loc =\
+        job_manager_loc.replace('xbatch.py', 'job_manager.py')
 
     pid =\
         subprocess.Popen(['python',
@@ -18,12 +20,11 @@ def start_manager(script_loc):
 def main():
     
     # Extract script name
-    script_name = list(sys.argv)[0]
+    script_name = list(sys.argv)[1]
     script_loc = os.path.abspath(script_name)
     
     # Start manager
     manager_pid = start_manager(script_loc)
-    
     print('Started Job Manager with pid:', manager_pid)
 
 if __name__ == "__main__":
