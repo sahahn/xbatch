@@ -61,9 +61,21 @@ def get_x_loc(script_loc):
 
 def save_x_script(info, x_loc, start, end):
 
+    # Change start and end to starting from 0
+    # So new end is end - start, so if start=50, end=100
+    # then end = 50, start = 0
+    increment = start # Save original start as increment
+    end = end - start
+    start = 0
+
     # Add start and end to lines
     lines = info['lines'].copy()
     lines[info['array_ind']] += str(start) + '-' + str(end)
+    
+    # Add in line that increments
+    inc_line = 'export SLURM_ARRAY_TASK_ID="$(($SLURM_ARRAY_TASK_ID + ' + str(increment) + '))"\n'
+    he = info['header_end']    
+    lines[:he+1] + inc_line + lines[he+1:]
 
     # Save file - okay to overwrite existing
     with open(x_loc, 'w') as f:
@@ -170,6 +182,9 @@ def init_script_parse(script_loc):
     # Save parsed in info
     info = {'script_loc': script_loc}
 
+    # End of header ind, keep track
+    info['header_end'] = 0
+
     # Parse script file
     for ind in range(len(lines)):
 
@@ -186,6 +201,9 @@ def init_script_parse(script_loc):
 
             # Re-save line with just stub
             lines[ind] = '#SBATCH --array='
+
+        if lines[ind].startswith('#SBATCH'):
+            info['header_end'] = ind
 
     # Save lines to info
     info['lines'] = lines
